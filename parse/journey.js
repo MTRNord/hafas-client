@@ -51,7 +51,7 @@ const parseJourney = (ctx, j) => { // j = raw jouney
 	}
 
 	if (opt.remarks && Array.isArray(j.msgL)) {
-		res.remarks = findRemarks(j.msgL).map(([remark]) => remark)
+		res.remarks = findRemarks(ctx, j.msgL).map(([remark]) => remark)
 	}
 
 	if (opt.scheduledDays) {
