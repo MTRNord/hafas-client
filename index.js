@@ -702,6 +702,66 @@ const createClient = (profile, userAgent, opt = {}) => {
 		}
 	}
 
+	const foo = async (opt = {}) => {
+		const {res, common} = await profile.request({profile, opt}, userAgent, {
+			meth: 'JourneyTree',
+			req: {
+				// todo: https://github.com/marudor/BahnhofsAbfahrten/blob/f32da187ef3306345674ea4665c97135f6f4c20f/packages/types/HAFAS/JourneyTree.ts#L3-L13
+				// getChilds?: number;
+				getHIM: false,
+				getParent: true,
+				getStatus: true,
+				// todo: https://github.com/marudor/BahnhofsAbfahrten/blob/f619e754f212980261eb7e2b151cd73ba0213da8/packages/types/HAFAS/index.ts#L90-L110
+				// himFltrL?: HimFilter[];
+				// todo: https://github.com/marudor/BahnhofsAbfahrten/blob/f619e754f212980261eb7e2b151cd73ba0213da8/packages/types/HAFAS/index.ts#L21-L46
+				jnyFltrL: [
+				// {
+				// 	mode: 'INC',
+				// 	type: 'JID',
+				// 	value: '1|18357|19|86|21102021',
+				// }
+				],
+				// pid?: string;
+				// rect?: GeoRect;
+				// ring?: GeoRing;
+			},
+		})
+		return null // todo
+	}
+
+	const bar = async (opt = {}) => {
+		const {res, common} = await profile.request({profile, opt}, userAgent, {
+			meth: 'JourneyGraph',
+			req: {
+				// todo: https://github.com/marudor/BahnhofsAbfahrten/blob/f32da187ef3306345674ea4665c97135f6f4c20f/packages/types/HAFAS/JourneyGraph.ts#L3-L11
+				date: '20211021',
+				getPasslist: true,
+				getProductStartEndInfo: true,
+				jnyFltrL: [{
+					mode: 'INC',
+					type: 'JID',
+					value: '1|18357|19|86|21102021',
+				}],
+			},
+		})
+		return null // todo
+	}
+
+	// const baz = async (opt = {}) => {
+	// 	const {res, common} = await profile.request({profile, opt}, userAgent, {
+	// 		meth: 'JourneyMatch',
+	// 		req: {
+	// 			// todo: https://github.com/marudor/BahnhofsAbfahrten/blob/f619e754f212980261eb7e2b151cd73ba0213da8/packages/types/HAFAS/JourneyMatch.ts#L41-L45
+	// 			date: '20211021',
+	// 			input: 'M1',
+	// 			jnyFltrL: [],
+	// 		},
+	// 	})
+	// 	const ctx = {profile, opt, common, res}
+
+	// 	return res.jnyL.map(jny => profile.parseTrip(ctx, jny))
+	// }
+
 	const client = {
 		departures,
 		arrivals,
@@ -710,6 +770,9 @@ const createClient = (profile, userAgent, opt = {}) => {
 		stop,
 		nearby,
 		serverInfo,
+		foo, // todo
+		bar, // todo
+		// baz, // todo
 	}
 	if (profile.trip) client.trip = trip
 	if (profile.radar) client.radar = radar

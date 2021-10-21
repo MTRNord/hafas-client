@@ -49,6 +49,9 @@ const parseArgs = [
 	['lines', 0, toString],
 	['lines', 1, parseJsObject],
 	['serverInfo', 0, parseJsObject],
+	['foo', 0, parseJsObject],
+	['bar', 0, parseJsObject],
+	['baz', 0, parseJsObject],
 ]
 
 const argv = mri(process.argv.slice(2))
